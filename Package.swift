@@ -1,11 +1,11 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.10
 
 import PackageDescription
 
 let package = Package(
     name: "Loaf",
     platforms: [
-        .iOS(.v9)
+        .iOS(.v16), .macCatalyst(.v16)
     ],
     products: [
         .library(
