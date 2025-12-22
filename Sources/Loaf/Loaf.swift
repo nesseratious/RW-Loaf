@@ -18,7 +18,7 @@ final public class Loaf {
         ///
         /// - left: The icon will be on the left of the text
         /// - right: The icon will be on the right of the text
-        public enum IconAlignment {
+        public enum IconAlignment: Equatable, Hashable {
             case left
             case right
         }
@@ -76,6 +76,9 @@ final public class Loaf {
         }
     }
     
+    /// Typealias to help Swift resolve nested types correctly in interface generation
+    public typealias LoafStyle = Style
+    
     /// Defines the loaf's status. (Default is `.info`)
     ///
     /// - success: Represents a success message
@@ -88,14 +91,14 @@ final public class Loaf {
         case error
         case warning
         case info
-        case custom(Style)
+        case custom(LoafStyle)
     }
     
     /// Defines the loaction to display the loaf. (Default is `.bottom`)
     ///
     /// - top: Top of the display
     /// - bottom: Bottom of the display
-    public enum Location {
+    public enum Location: Equatable, Hashable {
         case top
         case bottom
     }
@@ -105,7 +108,7 @@ final public class Loaf {
     /// - left: To / from the left
     /// - right: To / from the right
     /// - vertical: To / from the top or bottom (depending on the location of the loaf)
-    public enum Direction {
+    public enum Direction: Equatable, Hashable {
         case left
         case right
         case vertical
@@ -143,7 +146,7 @@ final public class Loaf {
     }
     
     // Reason a Loaf was dismissed
-    public enum DismissalReason {
+    public enum DismissalReason: Equatable, Hashable {
         case tapped
         case timedOut
     }
@@ -196,7 +199,7 @@ final public class Loaf {
 }
 
 final fileprivate class LoafManager: LoafDelegate {
-    static let shared = LoafManager()
+    nonisolated(unsafe) static let shared = LoafManager()
     
     fileprivate var queue = Queue<Loaf>()
     fileprivate var isPresenting = false
@@ -214,7 +217,8 @@ final fileprivate class LoafManager: LoafDelegate {
     fileprivate func presentIfPossible() {
         guard isPresenting == false, let loaf = queue.dequeue(), let sender = loaf.sender else { return }
         isPresenting = true
-        let loafVC = LoafViewController(loaf)
+        nonisolated(unsafe) let _loaf = loaf
+        let loafVC = LoafViewController(_loaf)
         loafVC.delegate = self
         sender.presentToast(loafVC)
     }

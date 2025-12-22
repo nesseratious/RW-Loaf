@@ -1,22 +1,24 @@
-// swift-tools-version:5.10
+// swift-tools-version: 6.2
+// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
-    name: "Loaf",
+    name: "LoafWrapper",
     platforms: [
-        .iOS(.v16), .macCatalyst(.v16)
+        .iOS(.v15), 
+        .macCatalyst(.v15)
     ],
     products: [
         .library(
-            name: "Loaf",
-            targets: ["Loaf"]
+            name: "LoafWrapper",
+            targets: ["LoafWrapper"]
         ),
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "Loaf",
+            name: "LoafWrapper",
             dependencies: [])
     ]
 )

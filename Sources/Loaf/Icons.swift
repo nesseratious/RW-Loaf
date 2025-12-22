@@ -11,7 +11,6 @@ import UIKit
 
 class Icons: NSObject {
     
-    
     //MARK: - Canvas Drawings
     
     /// Page 1
@@ -316,7 +315,7 @@ class Icons: NSObject {
     
     class func imageOfInfo() -> UIImage {
         struct LocalCache {
-            static var image: UIImage!
+            nonisolated(unsafe) static var image: UIImage!
         }
         if LocalCache.image != nil {
             return LocalCache.image
@@ -334,7 +333,7 @@ class Icons: NSObject {
     
     class func imageOfSuccess() -> UIImage {
         struct LocalCache {
-            static var image: UIImage!
+            nonisolated(unsafe) static var image: UIImage!
         }
         if LocalCache.image != nil {
             return LocalCache.image
@@ -352,7 +351,7 @@ class Icons: NSObject {
     
     class func imageOfError() -> UIImage {
         struct LocalCache {
-            static var image: UIImage!
+            nonisolated(unsafe) static var image: UIImage!
         }
         if LocalCache.image != nil {
             return LocalCache.image
@@ -370,7 +369,7 @@ class Icons: NSObject {
     
     class func imageOfWarning() -> UIImage {
         struct LocalCache {
-            static var image: UIImage!
+            nonisolated(unsafe) static var image: UIImage!
         }
         if LocalCache.image != nil {
             return LocalCache.image
